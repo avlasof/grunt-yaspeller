@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>yaspeller report</title>
+<style>
+    html, body
+    {
+        font-size: 1em;
+        font-family: Arial, sans-serif;
+    }
+
+    .page
+    {
+        padding: 20px 70px 30px 50px;
+    }
+
+    .word
+    {
+        background-color: rgba(0, 0, 0, 0.05);
+        border-radius: 3px;
+        padding: 0.1em 0.2em;
+    }
+
+    .table
+    {
+        table-layout: fixed;
+        width: 100%;
+        margin-left: 2em;
+        font-size: 0.9em;
+        border-spacing: 0 0;
+        border-collapse: collapse;
+    }
+
+    .table th
+    {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .table th, .table td
+    {
+        padding: 0.3em;
+    }
+
+    .table tr:nth-child(2n)
+    {
+        background-color: #fcfcfc;
+    }
+
+    .table tr:hover
+    {
+       background-color: #f0f0f0;
+    }
+
+    .table caption
+    {
+        font-size: 1.2em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .table td,
+    .table th
+    {
+        border: 1px solid #ddd;
+        padding: 6px 13px;
+    }
+
+    .table-num,
+    .table-count
+    {
+        text-align: right;
+    }
+
+    .table-num
+    {
+        width: 2em;
+        text-align: right;
+    }
+
+    .table-count
+    {
+        width: 2.5em;
+    }
+
+    .syserr,
+    .err,
+    .ok
+    {
+        margin-top: 2.5em;
+    }
+
+    .syserr
+    {
+        color: red;
+    }
+
+    .sym-err,
+    .num-err
+    {
+        color: red;
+    }
+
+    .num-ok,
+    .sym-ok
+    {
+        color: green;
+    }
+
+    .sym-ok,
+    .sym-err
+    {
+        display: inline-block;
+        font-weight: bold;
+        width: 1em;
+    }
+
+    .letters-en
+    {
+        color: red;
+    }
+
+    .letters-ru
+    {
+        color: green;
+    }
+
+    .time
+    {
+        margin-left: 0.5em;
+        color: #999;
+        font-size: 0.8em;
+    }
+</style>
+</head>
+<body>
+    <div class="page">
+        <div class="total">Processed resources: 6 (<span class="sym-err">&chi;</span>&ndash; 6</span>, <span class="sym-ok">&checkmark;</span>&ndash; 0)<br/>Checking finished: 0.838 sec.</div><div class="err"><span class="sym-err">&chi;</span><a target="_blank" href="file://test/fixtures/ru.html">test/fixtures/ru.html</a><span class="time">319 ms</span></div>
+<div class="typo">
+<table class="table"><caption>Typos</caption>
+<tr><th class="table-num">Num.</th><th class="table-name">Typo</th><th class="table-count">Count</th><th class="table-suggest">Suggest</th><th class="table-comment">Comment</th></tr>
+<tr>
+<td class="table-num">1.</td>
+<td class="table-name"><span class="word">немогу</span></td>
+<td class="table-count">1</td>
+<td class="table-suggest"><span class="word">не могу</span></td>
+<td class="table-comment"></td>
+</tr>
+<tr>
+<td class="table-num">2.</td>
+<td class="table-name"><span class="word">никогдаа</span></td>
+<td class="table-count">1</td>
+<td class="table-suggest"><span class="word">никогда</span></td>
+<td class="table-comment"></td>
+</tr>
+</table>
+</div><div class="err"><span class="sym-err">&chi;</span><a target="_blank" href="file://test/fixtures/ru_en.html">test/fixtures/ru_en.html</a><span class="time">299 ms</span></div>
+<div class="typo">
+<table class="table"><caption>Typos</caption>
+<tr><th class="table-num">Num.</th><th class="table-name">Typo</th><th class="table-count">Count</th><th class="table-suggest">Suggest</th><th class="table-comment">Comment</th></tr>
+<tr>
+<td class="table-num">1.</td>
+<td class="table-name"><span class="word">Documment</span></td>
+<td class="table-count">1</td>
+<td class="table-suggest"><span class="word">Document</span></td>
+<td class="table-comment"></td>
+</tr>
+<tr>
+<td class="table-num">2.</td>
+<td class="table-name"><span class="word">Белакаменная</span></td>
+<td class="table-count">1</td>
+<td class="table-suggest"><span class="word">Белокаменная</span></td>
+<td class="table-comment"></td>
+</tr>
+</table>
+<table class="table"><caption>Capitalization</caption>
+<tr><th class="table-num">Num.</th><th class="table-name">Typo</th><th class="table-count">Count</th><th class="table-suggest">Suggest</th><th class="table-comment">Comment</th></tr>
+<tr>
+<td class="table-num">1.</td>
+<td class="table-name"><span class="word">москва</span></td>
+<td class="table-count">1</td>
+<td class="table-suggest"><span class="word">Москва</span></td>
+<td class="table-comment"></td>
+</tr>
+</table>
+</div><div class="err"><span class="sym-err">&chi;</span><a target="_blank" href="file://test/fixtures/ru.html">test/fixtures/ru.html</a><span class="time">243 ms</span></div>
+<div class="typo">
+<table class="table"><caption>Typos</caption>
+<tr><th class="table-num">Num.</th><th class="table-name">Typo</th><th class="table-count">Count</th><th class="table-suggest">Suggest</th><th class="table-comment">Comment</th></tr>
+<tr>
+<td class="table-num">1.</td>
+<td class="table-name"><span class="word">немогу</span></td>
+<td class="table-count">1</td>
+<td class="table-suggest"><span class="word">не могу</span></td>
+<td class="table-comment"></td>
+</tr>
+<tr>
+<td class="table-num">2.</td>
+<td class="table-name"><span class="word">никогдаа</span></td>
+<td class="table-count">1</td>
+<td class="table-suggest"><span class="word">никогда</span></td>
+<td class="table-comment"></td>
+</tr>
+</table>
+</div><div class="err"><span class="sym-err">&chi;</span><a target="_blank" href="file://test/fixtures/ru_en.html">test/fixtures/ru_en.html</a><span class="time">247 ms</span></div>
+<div class="typo">
+<table class="table"><caption>Typos</caption>
+<tr><th class="table-num">Num.</th><th class="table-name">Typo</th><th class="table-count">Count</th><th class="table-suggest">Suggest</th><th class="table-comment">Comment</th></tr>
+<tr>
+<td class="table-num">1.</td>
+<td class="table-name"><span class="word">Белакаменная</span></td>
+<td class="table-count">1</td>
+<td class="table-suggest"><span class="word">Белокаменная</span></td>
+<td class="table-comment"></td>
+</tr>
+</table>
+</div><div class="err"><span class="sym-err">&chi;</span><a target="_blank" href="file://test/fixtures/ru.html">test/fixtures/ru.html</a><span class="time">242 ms</span></div>
+<div class="typo">
+<table class="table"><caption>Typos</caption>
+<tr><th class="table-num">Num.</th><th class="table-name">Typo</th><th class="table-count">Count</th><th class="table-suggest">Suggest</th><th class="table-comment">Comment</th></tr>
+<tr>
+<td class="table-num">1.</td>
+<td class="table-name"><span class="word">немогу</span></td>
+<td class="table-count">1</td>
+<td class="table-suggest"><span class="word">не могу</span></td>
+<td class="table-comment"></td>
+</tr>
+<tr>
+<td class="table-num">2.</td>
+<td class="table-name"><span class="word">никогдаа</span></td>
+<td class="table-count">1</td>
+<td class="table-suggest"><span class="word">никогда</span></td>
+<td class="table-comment"></td>
+</tr>
+</table>
+</div><div class="err"><span class="sym-err">&chi;</span><a target="_blank" href="file://test/fixtures/ru_en.html">test/fixtures/ru_en.html</a><span class="time">249 ms</span></div>
+<div class="typo">
+<table class="table"><caption>Typos</caption>
+<tr><th class="table-num">Num.</th><th class="table-name">Typo</th><th class="table-count">Count</th><th class="table-suggest">Suggest</th><th class="table-comment">Comment</th></tr>
+<tr>
+<td class="table-num">1.</td>
+<td class="table-name"><span class="word">Белакаменная</span></td>
+<td class="table-count">1</td>
+<td class="table-suggest"><span class="word">Белокаменная</span></td>
+<td class="table-comment"></td>
+</tr>
+</table>
+</div>
+    </div>
+</body>
+</html>

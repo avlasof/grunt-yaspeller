@@ -8,43 +8,90 @@
 
 'use strict';
 
+var fs = require('fs'),
+    async = require('async'),
+    yaspeller = require('yaspeller'),
+    report = require('yaspeller/lib/report'),
+    utils = require('yaspeller/lib/utils');
+
 module.exports = function(grunt) {
+    var initReports = 0,
+        addReports = function(reports) {
+            if (!initReports) {
+                report.addReports(reports);
+                initReports++;
+            }
+        };
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+    grunt.registerMultiTask('yaspeller', 'Search tool typos in the text, files and websites', function() {
+        var done = this.async(),
+            tasks = [],
+            options = this.options({
+                format: 'auto',
+                lang: 'en,ru',
+                dictionary: [],
+                report: ['console'],
+                byWords: false,
+                findRepeatWords: true,
+                flagLatin: false,
+                ignoreTags: ['code', 'kbd', 'object', 'samp', 'script', 'style', 'var'],
+                ignoreCapitalization: true,
+                ignoreDigits: true,
+                ignoreLatin: true,
+                ignoreRomanNumerals: true,
+                ignoreUppercase: true,
+                ignoreUrls: true,
+                maxRequests: 5
+            }),
+                hasData = function(err, data) {
+                return !err && data && Array.isArray(data.data) && data.data.length;
+            },
+                onResource = function(err, data) {
+                if(hasData(err, data)) {
+                    data.data = utils.delDictWords(data.data, options.dictionary);
+                    data.data = utils.delDuplicates(data.data);
+                }
 
-  grunt.registerMultiTask('yaspeller', 'Search tool typos in the text, files and websites', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
+                if(err) {
+                    grunt.log.error(err);
+                    done();
+                    return;
+                }
+
+                report.oneach(err, data);
+            };
+
+        grunt.log.writeln('Processing task...');
+        addReports(options.report);
+
+        this.files.forEach(function(f) {
+            var files = f.src;
+
+            tasks.push(function(cb) {
+                var subTasks = [];
+
+                files.forEach(function(file) {
+                    if (!grunt.file.exists(file)) {
+                        onResource(true, Error(file + ': is not exists'));
+                        return cb();
+                    }
+                    subTasks.push(function(subcb) {
+                        yaspeller.checkFile(file, function(err, data) {
+                            onResource(err, data);
+                            subcb();
+                        }, options);
+                    });
+                });
+
+                async.parallelLimit(subTasks, options.maxRequests || 2, function() {
+                    cb();
+                });
+            });
+
+            async.series(tasks, function() {
+                report.onend();
+                done();
+            });
+        });
     });
-
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
-
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });
-  });
-
 };
